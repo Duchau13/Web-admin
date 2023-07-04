@@ -1,0 +1,100 @@
+.title{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.container-table{
+    width: 80%;
+    margin:auto;
+}
+
+
+.name-oder > h1{
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.table-header{
+    background-color: #222222;
+}
+.table-header > tr > th {
+    color:#fff;
+}
+.time-oder{
+    font-weight:400;
+}
+.des-oder{
+    font-weight:400;
+    font-size:16px
+}
+.pay-oder{
+    color: var(--blue);
+}
+.confirm-oder{
+    background-color: var(--blue);
+    color:#fff;
+    border-radius: 2px;
+    border-color: var(--blue);
+    
+}
+.cancle-oder{
+    background-color: var(--red);
+    color:#fff;
+    border-radius: 2px;
+    border-color: var(--red);
+    
+}
+.text-confirm{
+    font-size:18px;
+    color: #00FF00;
+    font-weight: 500;
+}
+.text-cancel{
+    font-size:18px;
+    color: var(--red);
+    font-weight: 500;
+}
+.text-wait{
+    font-size:18px;
+    color: var(--primary);
+    font-weight: 600;
+}
+/*  css tim kiem  */
+.form-search{
+    display:flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.form-search > input {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.form-search > button {
+    color: #fff;
+    background-color: var(--blue);
+    border-color: var(--blue);
+    border-radius:5px;
+    margin-left: 20px;
+}
+.form-select{
+    margin: 0 10px 0 10px
+}
+
+
+@media only screen and (max-width: 720px){
+    
+    .container-table{
+        width: 90%;
+    }
+    .form-search{
+        display:flex;
+        margin-bottom: 20px;
+        align-items: flex-start;
+        width: 100%;
+    }
+ }

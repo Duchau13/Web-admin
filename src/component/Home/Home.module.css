@@ -1,0 +1,60 @@
+.navbar-main{
+    width: 100%;
+    height: 120px;
+    background-color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-logo{
+    height: 60px;
+    width:150px;
+    
+}
+.form-login{
+    width:500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    background-color: #EEEEEE;
+}
+ 
+.form-login > form > button{
+    height:50px;
+    width: 300px;
+    cursor: pointer;
+    background-color: var(--blue);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    border-color: var(--blue);
+    margin-bottom: 20px;
+}
+.form-login > form > button:hover{
+    background-color: var(--accent);
+}
+.text-err{
+    font-size:18px;
+    color: var(--red);
+}
+
+.button-submit{
+    display:block
+}
+.button-submit > button{
+    height:50px;
+    width: 300px;
+    cursor: pointer;
+    background-color: var(--blue);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    border-color: var(--blue);
+    margin-bottom: 20px;
+    margin-left: 100px;
+}
+.button-submit > button:hover{
+    background-color: var(--accent);
+}

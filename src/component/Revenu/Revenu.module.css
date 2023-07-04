@@ -1,0 +1,63 @@
+.title-name{
+    text-align:center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.container-total{
+    width:80%;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.form-search{
+    display:flex;
+    align-items: flex-start;
+}
+
+.total-revenu > p {
+    font-size: 18px;
+    font-weight: 500;
+}
+.form-search > input {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.form-search > button {
+    color: #fff;
+    background-color: var(--blue);
+    border-color: var(--blue);
+    border-radius:5px
+}
+.form-items {
+    width: 80%;
+    margin-bottom: 100px;
+    margin: auto;
+    margin-top: 50px;
+    
+}
+.form-items > h3 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.items-details{
+    display:flex;
+}
+.items-details > p {
+    width:25%;
+    font-size: 18px;
+    font-weight: 450;
+    text-align: center;
+}
+
+
+
+@media only screen and (max-width: 720px){
+    
+    .container-total{
+        width:100%;
+        display: block;
+        
+    }
+ }

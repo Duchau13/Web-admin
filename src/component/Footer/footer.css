@@ -1,0 +1,135 @@
+.header-logo{
+    width:100%;
+    left: 0;
+    height: 150px;
+    background-color:#181818;
+    background-image: url(https://demo2.pavothemes.com/poco/wp-content/uploads/2020/09/shape_dot.png);
+}
+.container-logo{
+    padding: 100px 0 0;
+}
+.logo{
+    text-align: center;
+}
+
+/* content footer */
+
+.container-content{
+    width: 100%;
+    height:350px;
+    background-color:#181818;
+    background-image: url(https://demo2.pavothemes.com/poco/wp-content/uploads/2020/09/shape_dot.png);
+    display:flex;
+}
+.content{
+    display: flex;
+    margin: auto;
+    position: relative;
+    height: 170px;
+    width: 80%;
+}
+.content-itiem{
+    width:25%;
+}
+
+.header-content-itiem {
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.content-itiem > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align:center;
+    color: #b0b0b0;
+}
+.content-itiem > h3{
+    color: #FFC222;
+    margin-top: 20px;
+    text-align: center;
+}
+.submit-gmail{
+    text-align: center;
+    margin-top: 20px;
+}
+.submit-gmail > input{
+    width: 190px;
+    height:40px;
+    background-color: #181818;
+    border-radius: 5px;
+    background: #b0b0b0;
+}
+.submit-gmail >button{
+    height: 46px;
+    background-color: #FFC222;
+    color: #000;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.submit-gmail >button:hover{
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+.introduce-itiem{
+    width: 100%;
+    height: 100px;
+    background-color: #00A850;
+    display: flex;
+    align-items: center;
+}
+
+.introduce-itiem1{
+    width: 40%;
+    margin-left: 10%;
+}
+.introduce-itiem2{
+    width: 40%;
+    text-align: end;
+}
+.introduce-img{
+    align-items: center;
+}
+.introduce-itiem1 > p {
+    color: #fff;
+}
+.introduce-itiem1 > a {
+    color:#FFC222;
+}
+
+
+
+@media only screen and (max-width: 670px) {
+    .header-logo{
+        padding-bottom: 40px;
+    }
+    .content{
+        display: block;
+        height: 100%;
+    }
+    .container-content{
+        height: 100%;
+    }
+    .content-itiem{
+        width:100%;
+        padding-bottom: 30px;
+    }
+    .introduce-itiem{
+        display: block;
+        height: 100%;
+    }
+    .introduce-itiem1{
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+    }
+    .introduce-itiem2{
+        width: 100%;
+        text-align: center;
+    }
+  }
+
