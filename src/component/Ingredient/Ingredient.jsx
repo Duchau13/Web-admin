@@ -5,7 +5,8 @@ import api from '../../redux/axois'
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Navbar from "../Navbar/navbar";
-
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -14,6 +15,7 @@ import Navbar from "../Navbar/navbar";
 const Ingredient = () => {
     const [items, setItems] = useState([])
     const token = localStorage.getItem('token')
+    const role = localStorage.getItem('role')
   
     const [pageCount,setPageCount] = useState(0)
     const navigate = useNavigate();
@@ -100,8 +102,58 @@ const Ingredient = () => {
             console.log(err)
         })
         
-     };
-    
+    };
+    const handleDetail = (id_item) => {
+        if(role==="5"){
+            navigate(`/ingredient/${id_item}`)
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+    const handleCreate = () => {
+        if(role==="5"){
+            navigate(`/Newingredỉnt`)
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+    const handleProcess = (item) => {
+        if(role==="3"){
+            navigate(`/ingredient/quantity/${item}`)
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
     // console.log(items.length)
     
     return(
@@ -113,7 +165,7 @@ const Ingredient = () => {
             <div className={classes['table-items__container']} >
                 
                 <button
-                 onClick={() => navigate("Newingredỉnt")}
+                 onClick={() => handleCreate()}
                  className={classes['button-add']}>Thêm mới nguyên liệu
                  </button>
                 
@@ -126,8 +178,8 @@ const Ingredient = () => {
                                     <td className={classes['column-image']}><Link to="/"><img src={item.image} alt="food image" width="90px" height="90px"></img></Link></td>
                                     <td className={classes['column-des']}>
                                         <div>
-                                        <h1 onClick={() => navigate(`/ingredient/${item.id_ingredient}`)} 
-                                        className={classes['name-itiem']} to="/">{item.name}</h1>
+                                        <h1 onClick={() => handleDetail(item.id_ingredient)}
+                                        className={classes['name-itiem']} >{item.name}</h1>
                                         </div>
                                     </td>
                                     <td className={classes['column-price']}>
@@ -138,8 +190,8 @@ const Ingredient = () => {
                                     </td>
                                     <td className={classes['button-remove']}>
                                         <button 
-                                            onClick={() => navigate(`/ingredient/quantity/${item.id_ingredient}`)}
-                                        >Cập nhập số lượng</button>
+                                            onClick={() => handleProcess(item.id_ingredient)}
+                                        >Chế Biến</button>
                                     </td>
                                 </tr>
                             )
@@ -168,6 +220,18 @@ const Ingredient = () => {
                 />
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 };

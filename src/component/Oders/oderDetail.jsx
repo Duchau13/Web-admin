@@ -19,6 +19,7 @@ const OderDetail = () => {
   
       })
     */
+   console.log(order)
     useEffect(() => {
         async function getData(){
           const res = await api.get(`/orders/detail/${id_order}`,
@@ -70,14 +71,17 @@ const OderDetail = () => {
       }
 
       const handleConfirm = () => {
+        try{
         api.get(`/orders/confirm/${id_order}`,
         {
         headers: {
             Access_token: token,
+        }})
         }
+        catch(err){
+            console.log(err);
         }
-        )
-        navigate('/oders')
+        // navigate('/oders')
       }
       const handleCancle = () => {
         api.get(`/orders/cancel/${id_order}`,
@@ -119,7 +123,9 @@ const OderDetail = () => {
                     }))}
                         <h3>Thông tin thanh toán</h3>
                         <div className={classes['info-payment']}>
-                            <p>Thời gian đặt hàng: {order.datetime}</p>
+                            <p>Tên khách hàng: {order.name_customer}</p>
+                            <p>Số điện thoại khách hàng: {order.phone}</p>
+                            <p>Thời gian đặt hàng: {order.time_order}</p>
                             <p>Tổng giá trị đơn hàng: {order.total}</p>
                             <p>Phương thức thanh toán : {order.name_payment}</p>
                             <h5>Trạng thái đơn hàng: <Status/></h5>

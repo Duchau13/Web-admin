@@ -28,7 +28,7 @@ const ListItems = () => {
             localStorage.setItem('setupTime', now);
         }
     }
-    //console.log(rows);
+    console.log(items);
     /*
     useEffect(()=>{
       if(!localStorage.getItem('token')){
@@ -147,10 +147,16 @@ const ListItems = () => {
                                     <td className={classes['column-count']}>
                                         <div>Loại thức ăn: {item.name_type}</div>
                                     </td>
+                                    <td className={classes['column-count']}>
+                                        <div>Số Lượng: {item.amount}</div>
+                                    </td>
                                     <td className={classes['button-remove']}>
                                         <button 
                                             onClick={e => handDelete(item.id_item)}
                                         >Remove</button>
+                                        <button 
+                                            onClick={e => handDelete(item.id_item)}
+                                        >Chế Biến</button>
                                     </td>
                                 </tr>
                             )

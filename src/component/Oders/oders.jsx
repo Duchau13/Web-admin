@@ -4,18 +4,21 @@ import Navbar from '../Navbar/navbar'
 import React, { useEffect, useState } from "react";
 import api from '../../redux/axois'
 import { useNavigate} from "react-router-dom";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 
 const Oders = () => {
     const token = localStorage.getItem('token')
+    const role = localStorage.getItem('role')
     const [orders,setOrders] = useState([])
     const [fromday,setFromday] = useState(0)
     const [today,setToday] = useState(0)
     const [status,setStatus] = useState(0)
     const navigate = useNavigate();
-    console.log(token)
+    console.log(orders)
     /*
     useEffect(()=>{
         if(!localStorage.getItem('token')){
@@ -121,15 +124,39 @@ const Oders = () => {
         
     }
     const CreateReport = async () => {
-        const res = await api.post(`/orders/report`,{},
+        api.post(`/orders/report`,{},
         {
             headers: {
                 Access_token: token,
             }
         }
         )
-        return res;
-        
+        .then(function (res) {
+            console.log(res)
+            toast.success('Tạo báo cáo thành công', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }); 
+        })
+        .catch(function (res) {
+            console.log(res)
+            toast.warn('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        });
     }
 
     
@@ -155,7 +182,21 @@ const Oders = () => {
     }
 
     const handleRepost = async () => {
-        CreateReport();
+        if(role==="5"){
+            CreateReport();
+        }
+        else{
+            toast.warn('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
       
     return(
@@ -166,13 +207,13 @@ const Oders = () => {
             </div>
             <div className={classes['container-table']}>
             <div className={classes['form-search']}>
-                <input type="date"
+                {/* <input type="date"
                     onChange={handleChange1} 
                 />
                 <p>Đến ngày</p>
                 <input type="date"
                     onChange={handleChange2} 
-                />
+                /> */}
                 <label htmlFor="">Trạng thái</label>
                 <select className={classes['form-select']}
                     onChange={handleChangeStatus}
@@ -196,10 +237,10 @@ const Oders = () => {
             <table className="table ">
                 <thead className={classes['table-header']}>
                     <tr>
-                        <th>Tên Khách Hàng</th>
+                        <th>Mã hoá đơn</th>
                         <th>Thời gian đặt hàng</th>
-                        <th>Ghi chú</th>
-                        <th>Phương thức tt</th>
+                        <th>Tiền hoá đơn</th>
+                        <th>Phí ship</th>
                         <th>Tổng tiền</th>
                         <th>Trạng thái thanh toán</th>
                     </tr>
@@ -212,12 +253,14 @@ const Oders = () => {
                                     <h1
                                         onClick={() => navigate(`/oder/${order.id_order}`)}
                                     >
-                                        {order.name_customer}
+                                        {order.id_order}
                                     </h1>
                                     </th>
-                                    <th className={classes['time-oder']}>{order.time_order}</th>
-                                    <th className={classes['des-oder']}>{order.description}</th>
-                                    <th className={classes['pay-oder']}>{order.name_payment}</th>
+                                    <th className={classes['time-oder']} onClick={() => navigate(`/oder/${order.id_order}`)}>
+                                        {order.time_order}
+                                    </th>
+                                    <th className={classes['des-oder']}>{order.item_fee}</th>
+                                    <th className={classes['pay-oder']}>{order.delivery_fee}</th>
                                     <th>{order.total}</th>
                                     <th><Status value={order.status}/></th>
                                 </tr>
@@ -226,6 +269,18 @@ const Oders = () => {
                 </tbody>
             </table>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 }

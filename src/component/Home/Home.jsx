@@ -24,6 +24,7 @@ const Home = () => {
             console.log(res.data);
             localStorage.setItem('token',res.data.token);
             localStorage.setItem('timeOut',res.data.expireTime)
+            localStorage.setItem('role',res.data.id_role)
             
         }
         catch(err){
@@ -40,6 +41,7 @@ const Home = () => {
             console.log(res.data);
             localStorage.setItem('token',res.data.token);
             localStorage.setItem('timeOut',res.data.expireTime)
+            localStorage.setItem('role',res.data.id_role)
             
         }
         catch(err){

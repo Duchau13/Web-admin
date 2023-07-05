@@ -84,7 +84,7 @@ const IngredientDetail = () => {
 
     return (
         <div>
-            <Link to="/" className={classes["back-icon"]}>
+            <Link to="/ingredient" className={classes["back-icon"]}>
                 <i class="fa-solid fa-chevron-left"></i>
                 <h>Quay lai</h>
             </Link>
