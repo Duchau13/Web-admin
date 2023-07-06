@@ -138,21 +138,21 @@ const Unprocessedingredients = () => {
         }
     }
     const handleProcess = (item) => {
-        // if(role==="3"){
-        //     navigate(`/ingredient/quantity/${item}`)
-        // }
-        // else{
-        //     toast.error('Bạn không có quyền sử dụng chức năng này', {
-        //         position: "top-right",
-        //         autoClose: 2000,
-        //         hideProgressBar: true,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //     });
-        // }
+        if(role==="3"){
+            navigate(`/ingredient/quantity/${item}`)
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
     // console.log(items.length)
     
@@ -189,9 +189,12 @@ const Unprocessedingredients = () => {
                                         <div>Số Lượng: {item.quantity}</div>
                                     </td>
                                     <td className={classes['button-remove']}>
+                                        <input type="number"
+                                               placeholder="Nhập số lượng"
+                                        ></input>
                                         <button 
                                             onClick={() => handleProcess(item.id_u_ingredient)}
-                                        >Chế Biến</button>
+                                        >Nhập</button>
                                     </td>
                                 </tr>
                             )

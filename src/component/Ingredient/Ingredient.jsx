@@ -154,6 +154,23 @@ const Ingredient = () => {
             });
         }
     }
+    const handleRepice = (item) => {
+        if(role==="2"){
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            navigate(`/ingredient/repice/${item}`)
+        }
+    }
     // console.log(items.length)
     
     return(
@@ -191,7 +208,10 @@ const Ingredient = () => {
                                     <td className={classes['button-remove']}>
                                         <button 
                                             onClick={() => handleProcess(item.id_ingredient)}
-                                        >Chế Biến</button>
+                                        >Nhập số lượng</button>
+                                        <button 
+                                            onClick={() => handleRepice(item.id_ingredient)}
+                                        >Xem Công Thức</button>
                                     </td>
                                 </tr>
                             )

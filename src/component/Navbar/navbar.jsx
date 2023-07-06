@@ -26,8 +26,52 @@ const Navbar = () => {
             });
         }
     }
-    const handleToOrder = () => {
+    const handleToImportinvoice = () => {
         if(role==="2"){
+            navigate('/importinvoice')
+        }
+        else{
+            toast.error('Bạn không có quyền truy cập', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+    const handleToRepost = () => {
+        if(role==="5"){
+            navigate('/repost')
+            toast.error('Bạn không có quyền truy cập', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            toast.error('Bạn không có quyền truy cập', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+    const handleToOrder = () => {
+        if(role===""){
             toast.error('Bạn không có quyền truy cập', {
                 position: "top-right",
                 autoClose: 1500,
@@ -55,9 +99,12 @@ const Navbar = () => {
                 progress: undefined,
                 theme: "light",
             });
+            navigate('/ingredient')
+            
         }
         else{
             navigate('/ingredient')
+            
         }
     }
     const handleToUnprocessedingredients = () => {
@@ -75,6 +122,7 @@ const Navbar = () => {
         }
         else{
             navigate('/unprocessedingredients')
+            
         }
     }
     
@@ -106,7 +154,7 @@ const Navbar = () => {
                         Đơn hàng
                     </div>
                 </div>
-                <div onClick={() => {handleToDashboard()}}>
+                <div onClick={() => {handleToRepost()}}>
                     <div 
                         className={classes['button-booking']}
                         
@@ -120,6 +168,14 @@ const Navbar = () => {
                         
                     >
                         Doanh thu
+                    </div>
+                </div>
+                <div onClick={() => {handleToImportinvoice()}}>
+                    <div 
+                        className={classes['button-booking']}
+                        
+                    >
+                        Hoá Đơn Nhập
                     </div>
                 </div>
 

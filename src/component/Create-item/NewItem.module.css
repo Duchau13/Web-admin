@@ -76,6 +76,20 @@
     color:var(--red) ;
 }
 
+.button-submit{
+    height:40px;
+    width: 200px;
+    cursor: pointer;
+    background-color: var(--blue);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    border-color: var(--blue);
+    margin-bottom: 50px;
+}
+.set__payment > option{
+    width: 300px;
+}
 @media only screen and (max-width: 720px){
     .container{
         width: 80%;

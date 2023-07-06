@@ -172,6 +172,24 @@ const ListItems = () => {
             });
         }
     }
+    const handleToRepice = (id_item) => {
+        if(role==="2"){
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            navigate(`/item/${id_item}`)
+        }
+        else{
+            navigate(`/item/repice/${id_item}`)
+        }
+    }
     
      
     
@@ -207,8 +225,11 @@ const ListItems = () => {
                                     <td className={classes['column-count']}>
                                         <div>Loại thức ăn: {item.name_type}</div>
                                     </td>
-                                    <td className={classes['column-count']}>
-                                        <div>Số Lượng: {item.amount}</div>
+                                    <td className={classes['button-remove']}>
+                                        <button 
+                                            onClick={e => handleToRepice(item.id_item)}
+                                        >Xem Công Thức
+                                        </button>
                                     </td>
                                     <td className={classes['button-remove']}>
                                         <button 

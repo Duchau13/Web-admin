@@ -100,7 +100,7 @@ const Oders = () => {
         
     }
     const fetchDataOnlyStatus = async () => {
-        const res = await api.get(`/orders/thongkedonhang?status=${status}`,
+        const res = await api.get(`/orders?status=${status}`,
         {
             headers: {
                 Access_token: token,
@@ -109,6 +109,7 @@ const Oders = () => {
         )
         const data = res.data.orderList;
         return data;
+        console.log(data);
         
     }
     const fetchDataAll = async () => {
@@ -124,6 +125,7 @@ const Oders = () => {
         
     }
     const CreateReport = async () => {
+        if(role==="2"){
         api.post(`/orders/report`,{},
         {
             headers: {
@@ -157,6 +159,19 @@ const Oders = () => {
                 theme: "light",
             });
         });
+        }
+        else{
+            toast.warn('Bạn không có quyền sử dụng', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 
     
@@ -182,7 +197,7 @@ const Oders = () => {
     }
 
     const handleRepost = async () => {
-        if(role==="5"){
+        if(role==="2"){
             CreateReport();
         }
         else{
@@ -239,6 +254,8 @@ const Oders = () => {
                     <option value="0">Chưa xác nhận</option>
                     <option value="1">Đã xác nhận</option>
                     <option value="2">Đã Huỷ</option>
+                    <option value="3">Đang vận chuyển</option>
+                    <option value="4">Đã Hoàn Thành</option>
                 </select>
                 <button
                     onClick={handlePgaeclick}

@@ -16,11 +16,11 @@
     margin-left: 50px;
 }
 .button-manage{
-    width: 120px;
+    width: 100px;
     height: 80px;
     color: #fff;
     display: flex;
-    font-size: 22px;
+    font-size: 18px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -30,11 +30,11 @@
 
 }
 .button-booking{
-    width: 120px;
+    width: 100px;
     height: 80px;
     color: #fff;
     display: flex;
-    font-size: 22px;
+    font-size: 18px;
     align-items: center;
     justify-content: center;
     cursor: pointer;

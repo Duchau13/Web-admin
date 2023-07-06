@@ -31,7 +31,17 @@
     border-color: var(--blue);
     
 }
-
+.button-submit{
+    height:40px;
+    width: 200px;
+    cursor: pointer;
+    background-color: var(--blue);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    border-color: var(--blue);
+    margin-bottom: 50px;
+}
 .button-submit:hover{
     background-color: var(--primary);
     border-color: var(--primary);
