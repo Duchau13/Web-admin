@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from './Ingredient.module.css'
+import classes from './Unprocessedingredients.module.css'
 import { Link } from "react-router-dom";
 import api from '../../redux/axois'
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const Ingredient = () => {
+const Unprocessedingredients = () => {
     const [items, setItems] = useState([])
     const token = localStorage.getItem('token')
     const role = localStorage.getItem('role')
@@ -24,7 +24,7 @@ const Ingredient = () => {
     // goi api data items
     
     const getData = async() => {
-        const res = await api.get("/ingredients",{
+        const res = await api.get("/unprocessedingredients",{
             headers: {
                 Access_token: token,
             },
@@ -46,7 +46,7 @@ const Ingredient = () => {
     },[])
     
     const fetchData = async (currentPage) => {
-        const res = await api.get(`/ingredients/page/${currentPage}`,{
+        const res = await api.get(`/unprocessedingredients/page/${currentPage}`,{
             headers: {
                 Access_token: token,
         },})
@@ -105,12 +105,12 @@ const Ingredient = () => {
     };
     const handleDetail = (id_item) => {
         if(role==="5"){
-            navigate(`/ingredient/${id_item}`)
+            navigate(`/unprocessedingredients/detail/${id_item}`)
         }
         else{
             toast.error('Bạn không có quyền sử dụng chức năng này', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -122,12 +122,12 @@ const Ingredient = () => {
     }
     const handleCreate = () => {
         if(role==="5"){
-            navigate(`/ingredient/Newingredỉnt`)
+            navigate(`/unprocessedingredients/NewUnprocessedingredients`)
         }
         else{
             toast.error('Bạn không có quyền sử dụng chức năng này', {
                 position: "top-right",
-                autoClose: 1500,
+                autoClose: 1000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -138,21 +138,21 @@ const Ingredient = () => {
         }
     }
     const handleProcess = (item) => {
-        if(role==="3"){
-            navigate(`/ingredient/quantity/${item}`)
-        }
-        else{
-            toast.error('Bạn không có quyền sử dụng chức năng này', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
+        // if(role==="3"){
+        //     navigate(`/ingredient/quantity/${item}`)
+        // }
+        // else{
+        //     toast.error('Bạn không có quyền sử dụng chức năng này', {
+        //         position: "top-right",
+        //         autoClose: 2000,
+        //         hideProgressBar: true,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //     });
+        // }
     }
     // console.log(items.length)
     
@@ -174,11 +174,11 @@ const Ingredient = () => {
                     <tbody>
                         {items.map((item =>{
                             return (
-                                <tr key={item.id_item}>
+                                <tr key={item.id_u_ingredient}>
                                     <td className={classes['column-image']}><Link to="/"><img src={item.image} alt="food image" width="90px" height="90px"></img></Link></td>
                                     <td className={classes['column-des']}>
                                         <div>
-                                        <h1 onClick={() => handleDetail(item.id_ingredient)}
+                                        <h1 onClick={() => handleDetail(item.id_u_ingredient)}
                                         className={classes['name-itiem']} >{item.name}</h1>
                                         </div>
                                     </td>
@@ -190,7 +190,7 @@ const Ingredient = () => {
                                     </td>
                                     <td className={classes['button-remove']}>
                                         <button 
-                                            onClick={() => handleProcess(item.id_ingredient)}
+                                            onClick={() => handleProcess(item.id_u_ingredient)}
                                         >Chế Biến</button>
                                     </td>
                                 </tr>
@@ -236,4 +236,4 @@ const Ingredient = () => {
     )
 };
 
-export default Ingredient;
+export default Unprocessedingredients;

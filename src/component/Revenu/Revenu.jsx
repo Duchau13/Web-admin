@@ -88,7 +88,7 @@ function Revenu()  {
           console.log(err)
         })
     },[])
-    console.log(chart)
+    console.log(items)
     
     
 

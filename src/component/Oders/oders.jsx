@@ -198,6 +198,23 @@ const Oders = () => {
             });
         }
     }
+    const handleDetail =  (id_item) => {
+        if(role==="3"){
+            navigate(`/oder/${id_item}`)
+        }
+        else{
+            toast.warn('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
       
     return(
         <div>
@@ -251,12 +268,12 @@ const Oders = () => {
                                 <tr key={order.id_order}>
                                     <th className={classes['name-oder']}>
                                     <h1
-                                        onClick={() => navigate(`/oder/${order.id_order}`)}
+                                        onClick={() => handleDetail(order.id_order)}
                                     >
                                         {order.id_order}
                                     </h1>
                                     </th>
-                                    <th className={classes['time-oder']} onClick={() => navigate(`/oder/${order.id_order}`)}>
+                                    <th className={classes['time-oder']} onClick={() => handleDetail(order.id_order)}>
                                         {order.time_order}
                                     </th>
                                     <th className={classes['des-oder']}>{order.item_fee}</th>

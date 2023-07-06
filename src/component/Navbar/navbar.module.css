@@ -23,6 +23,7 @@
     font-size: 22px;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .button-manage:hover{
     color: var(--primary);
@@ -36,6 +37,7 @@
     font-size: 22px;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .button-booking:hover{
     color: var(--primary);

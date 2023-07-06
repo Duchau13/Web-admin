@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import api from '../../redux/axois'
 import { useNavigate,useParams } from "react-router-dom";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const OderDetail = () => {
     const token = localStorage.getItem('token')
+    const role = localStorage.getItem('role')
     const [order, setOrder] = useState([])
     const [items, setItems] = useState([])
     const navigate = useNavigate();
@@ -19,7 +22,7 @@ const OderDetail = () => {
   
       })
     */
-   console.log(order)
+   console.log(token)
     useEffect(() => {
         async function getData(){
           const res = await api.get(`/orders/detail/${id_order}`,
@@ -39,17 +42,79 @@ const OderDetail = () => {
         getData().catch((err) => {
           console.log(err)
         })
-      },[])
+    },[])
 
       //console.log(oder)
       //console.log(items)
-      function Status() {
+      
+      console.log(role)
+    const handleConfirm = (id_order) => {
+        console.log(id_order)
+        if(role==="3"){
+        try{
+            api.get(`/orders/confirm/${id_order}`,
+            {
+            headers: {
+                Access_token: token,
+            }})
+            toast.success('Tạo báo cáo thành công', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setTimeout(() => {
+                navigate('/orders')
+            }, 2000);
+        }
+        catch(err){
+            console.log(err);
+            toast.error('Thao tác thất bại', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        }else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        // navigate('/oders')
+      }
+    const handleCancle = () => {
+        api.get(`/orders/cancel/${id_order}`,
+        {
+        headers: {
+            Access_token: token,
+        }
+        }
+        )
+        navigate('/oders')
+    }
+    function Status(id) {
         if(order.status===0){
             return(
                 <div className={classes['container-button']} >
                     <button 
                         className={classes['confirm-button']}
-                        onClick={handleConfirm}
+                        onClick={() => handleConfirm(id.id)}
                     >
                         Xác Nhận
                     </button>
@@ -68,31 +133,7 @@ const OderDetail = () => {
         else{
             return <p className={classes['text-cancle']}>Đã huỷ</p>
         }
-      }
-
-      const handleConfirm = () => {
-        try{
-        api.get(`/orders/confirm/${id_order}`,
-        {
-        headers: {
-            Access_token: token,
-        }})
-        }
-        catch(err){
-            console.log(err);
-        }
-        // navigate('/oders')
-      }
-      const handleCancle = () => {
-        api.get(`/orders/cancel/${id_order}`,
-        {
-        headers: {
-            Access_token: token,
-        }
-        }
-        )
-        navigate('/oders')
-      }
+    }
 
     return (
         <div>
@@ -128,12 +169,24 @@ const OderDetail = () => {
                             <p>Thời gian đặt hàng: {order.time_order}</p>
                             <p>Tổng giá trị đơn hàng: {order.total}</p>
                             <p>Phương thức thanh toán : {order.name_payment}</p>
-                            <h5>Trạng thái đơn hàng: <Status/></h5>
+                            <h5>Trạng thái đơn hàng: <Status id = {order.id_order}/></h5>
                         </div>
                     </form>
                        
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 }

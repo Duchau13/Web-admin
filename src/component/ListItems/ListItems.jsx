@@ -5,7 +5,8 @@ import api from '../../redux/axois'
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Navbar from "../Navbar/navbar";
-
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -14,7 +15,7 @@ import Navbar from "../Navbar/navbar";
 const ListItems = () => {
     const [items, setItems] = useState([])
     const token = localStorage.getItem('token')
-  
+    const role = localStorage.getItem('role')
     const [pageCount,setPageCount] = useState(0)
     const navigate = useNavigate();
     var timeOut = localStorage.getItem('timeOut'); // Reset storage 
@@ -84,6 +85,7 @@ const ListItems = () => {
     */
 
       const handDelete = async (id) => {
+        if(role==="5"){
         try{
             //setItems(items.filter((item) => item.id_item !== item.id_item));
             await api.delete(`/items/delete/${id}`,{
@@ -93,8 +95,19 @@ const ListItems = () => {
             })
             //console.log(item.id_item)
             .then(() =>{
-                alert("xoa thanh cong");
-                navigate('/')
+                toast.success('Xoá Thành Công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
                 
                
             })
@@ -110,8 +123,55 @@ const ListItems = () => {
           getData().catch((err) => {
             console.log(err)
         })
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
         
-     };
+    };
+    const handleToCreate = () => {
+        if(role==="5"){
+            navigate("NewItem")
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+    const handleToDetail = (id_item) => {
+        if(role==="5"){
+            navigate(`/item/${id_item}`)
+        }
+        else{
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
     
      
     
@@ -124,7 +184,7 @@ const ListItems = () => {
             <div className={classes['table-items__container']} >
                 
                 <button
-                 onClick={() => navigate("NewItem")}
+                 onClick={() => handleToCreate()}
                  className={classes['button-add']}>Thêm mới thức ăn
                  </button>
                 
@@ -137,7 +197,7 @@ const ListItems = () => {
                                     <td className={classes['column-image']}><Link to="/"><img src={item.image} alt="food image" width="90px" height="90px"></img></Link></td>
                                     <td className={classes['column-des']}>
                                         <div>
-                                        <h1 onClick={() => navigate(`/item/${item.id_item}`)} 
+                                        <h1 onClick={() => handleToDetail(item.id_item)} 
                                         className={classes['name-itiem']} to="/">{item.name}</h1>
                                         </div>
                                     </td>
@@ -185,6 +245,18 @@ const ListItems = () => {
                 />
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 };
