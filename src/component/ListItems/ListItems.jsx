@@ -190,6 +190,23 @@ const ListItems = () => {
             navigate(`/item/repice/${id_item}`)
         }
     }
+    const handleToQuantity = (id_item) => {
+        if(role==="2"){
+            toast.error('Bạn không có quyền sử dụng chức năng này', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            navigate(`/item/quantity/${id_item}`)
+        }
+    }
     
      
     
@@ -236,7 +253,7 @@ const ListItems = () => {
                                             onClick={e => handDelete(item.id_item)}
                                         >Remove</button>
                                         <button 
-                                            onClick={e => handDelete(item.id_item)}
+                                            onClick={e => handleToQuantity(item.id_item)}
                                         >Chế Biến</button>
                                     </td>
                                 </tr>

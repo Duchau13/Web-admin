@@ -86,10 +86,19 @@ const Ingredient = () => {
             })
             //console.log(item.id_item)
             .then(() =>{
-                alert("xoa thanh cong");
-                navigate('/')
-                
-               
+                toast.success('Chế Biến Thành Công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/ingredient')
+                }, 2000);
             })
         }
         catch (err){
@@ -208,7 +217,7 @@ const Ingredient = () => {
                                     <td className={classes['button-remove']}>
                                         <button 
                                             onClick={() => handleProcess(item.id_ingredient)}
-                                        >Nhập số lượng</button>
+                                        >Chế Biến</button>
                                         <button 
                                             onClick={() => handleRepice(item.id_ingredient)}
                                         >Xem Công Thức</button>

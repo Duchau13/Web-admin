@@ -18,6 +18,7 @@
 .add-form {
     width: 100%;
     margin-bottom: 100px;
+    margin-top: 20px;
     
 }
 .add-form > button {
@@ -100,4 +101,13 @@
     .back-icon{
         width: 80%;
     }   
+}
+
+.repice > h6{
+    font-size: 24px;
+}
+
+.set__payment{
+    width:550px;
+    margin-top: 20px;
 }

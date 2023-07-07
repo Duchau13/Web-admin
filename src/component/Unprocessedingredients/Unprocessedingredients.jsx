@@ -189,9 +189,6 @@ const Unprocessedingredients = () => {
                                         <div>Số Lượng: {item.quantity}</div>
                                     </td>
                                     <td className={classes['button-remove']}>
-                                        <input type="number"
-                                               placeholder="Nhập số lượng"
-                                        ></input>
                                         <button 
                                             onClick={() => handleProcess(item.id_u_ingredient)}
                                         >Nhập</button>

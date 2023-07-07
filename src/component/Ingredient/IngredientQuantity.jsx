@@ -7,6 +7,8 @@ import { useNavigate,useParams } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const IngredientQuantity = () => {
@@ -32,12 +34,33 @@ const IngredientQuantity = () => {
                 }
             )
             .then(res =>{
-                alert("cập nhập thành công")
-                navigate('/ingredient')
+                toast.success('Chế Biến Thành Công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/ingredient')
+                }, 2000);
             })
             .catch(err =>{
                 console.log(err)
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
         }
         
@@ -65,7 +88,7 @@ const IngredientQuantity = () => {
             </Link>
             <div className={classes["container"]}>
                 <div className={classes["form-main"]}>
-                    <h1>Cập nhập số lượng</h1>
+                    <h1>Chế Biến</h1>
                     <p className={classes["text-err"]}>{error}</p>
                     <form action="" className={classes["add-form"]}>
                         
@@ -79,12 +102,24 @@ const IngredientQuantity = () => {
                         <button className={classes['button-submit']}
                                 onClick={handleSubmit}
                         >
-                            Cập nhập
+                            Chế Biến
                         </button>
                     </form>
                        
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 };

@@ -3,7 +3,7 @@ import classes from './NewItem.module.css'
 import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 //import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
@@ -11,32 +11,23 @@ import {ToastContainer, toast} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const NewItem = () => {
+const ItemQuantity = () => {
 
     const token = localStorage.getItem('token')
-    const [items,setItems] = useState({
-        name: "",
-        image:"",
-        id_type: "",
-        price: 0,
-    })
+    const [items,setItems] = useState()
     const navigate = useNavigate();
-    //const {id} = useParams();
+    const { id } = useParams();
     const [error, setError] = useState("")
-
-
+    console.log(id)
     
-    console.log(items);
-    //console.log(items[0]);
-    
-
-
     const handleSubmit = (e) =>{
         e.preventDefault();
 
         try{
         {
-            api.post('/items/create', items,
+            api.post(`items/${id}`, {
+                quantity: items
+            },
                 {
                     headers: {
                         Access_token: token,
@@ -44,7 +35,7 @@ const NewItem = () => {
                 }
             )
             .then(res =>{
-                toast.success('Thêm Mới Thành Công', {
+                toast.success('Chế Biến Thành Công', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -79,12 +70,12 @@ const NewItem = () => {
         }
         
     }
-    console.log(error)
+    console.log(items)
     const handleChange = (e) => {
         
-        const itemsClone = {...items};
-        itemsClone[e.target.name] = e.target.value;
-        setItems(itemsClone);
+        // const itemsClone = {...items};
+        // itemsClone[e.target.name] = e.target.value;
+        setItems(e.target.value);
     
     }
 
@@ -92,55 +83,27 @@ const NewItem = () => {
 
     return (
         <div>
-            <Link to="/" className={classes["back-icon"]}>
+            <Link to="/ingredient   " className={classes["back-icon"]}>
                 <i class="fa-solid fa-chevron-left"></i>
                 <h>Quay lai</h>
             </Link>
             <div className={classes["container"]}>
                 <div className={classes["form-main"]}>
-                    <h1>Thêm mới thức ăn</h1>
+                    <h1>Chế Biến</h1>
                     <p className={classes["text-err"]}>{error}</p>
                     <form action="" className={classes["add-form"]}>
                         
                         <Input
-                            name="name"
-                            label="Tên thức ăn"
-                            placeholder="Nhập tên thức ăn"
+                            name="quantity"
+                            label="số lượng"
+                            placeholder="Nhập số lượng nguyên liệu"
                             required={true}
-                            value={items.name}
                             onChange={handleChange}
                         />
-                        
-                        <Input
-                            name="image"
-                            label="Ảnh"
-                            placeholder="Nhập đường dẫn hình ảnh"
-                            required={true}
-                            value={items.image}
-                            onChange={handleChange}
-                        />
-                        
-                        <select name="id_type" onChange={handleChange}>
-                            <option value=""></option>
-                            <option value="1">Trà sữa</option>
-                            <option value="2">Đồ ăn nhẹ</option>
-                            <option value="3">Bánh ngọt</option>
-                            <option value="4">Topping</option>
-                        </select>
-                        <Input
-                            type="number"
-                            name="price"
-                            label="Giá"
-                            placeholder="Nhập Giá "
-                            required={true}
-                            value={items.price}
-                            onChange={handleChange}
-                        />
-                        
                         <button className={classes['button-submit']}
                                 onClick={handleSubmit}
                         >
-                            Thêm mới
+                            Chế Biến
                         </button>
                     </form>
                        
@@ -161,4 +124,4 @@ const NewItem = () => {
         </div>
     )
 };
-export default NewItem;
+export default ItemQuantity;

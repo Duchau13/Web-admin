@@ -4,11 +4,11 @@ import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import TextArea from "../Input/TextArea"
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
-import axios from "axios";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -85,12 +85,33 @@ const RepiceIngredient = () => {
                 }
             )
             .then(res =>{
-                alert("thêm thành công")
-                navigate('/ingredient')
+                toast.success('Thêm thành công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/ingredient')
+                }, 2000);
             })
             .catch(err =>{
                 console.log(err)
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
         }
         
@@ -133,8 +154,10 @@ const RepiceIngredient = () => {
                     <form action="" className={classes["add-form"]}>
                     {repices.map((repice =>{
                             return (
-                                <div>
-                                <Input
+                                <div className={classes["repice"]}>
+                                    <h6>{repice.name}</h6>
+                                    <p>Số Lượng :{repice.quantity}</p>
+                                {/* <Input
                                     name="name"
                                     label="Tên thực phẩm"
                                     placeholder="Nhập tên thức ăn"
@@ -147,7 +170,7 @@ const RepiceIngredient = () => {
                                     placeholder="Nhập tên thức ăn"
                                     required={true}
                                     value={repice.quantity}
-                                />
+                                /> */}
                                 </div>
                             )
                         }))}
@@ -175,6 +198,18 @@ const RepiceIngredient = () => {
                         </button>
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
     

@@ -4,23 +4,37 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './App.css'
 import Home from './component/Home/Home'
+
+/* Item */
 import ListItems from "./component/ListItems/ListItems";
 import NewItem from "./component/Create-item/NewItem";
 import RepiceItem from "./component/Create-item/RepiceItem";
 import Update from "./component/Create-item/UpdateItem";
+import ItemQuantity from "./component/Create-item/ItemQuantity";
+
+/* orders */
 import Oders from "./component/Oders/oders";
 import OderDetail from "./component/Oders/oderDetail";
+/* renevu */
 import Revenu from "./component/Revenu/Revenu";
+
+/* Ingredient */
 import Ingredient from "./component/Ingredient/Ingredient";
 import IngredientDetail from "./component/Ingredient/IngredientDetail"
 import NewIngredient from "./component/Ingredient/NewIngredien";
 import IngredientQuantity from "./component/Ingredient/IngredientQuantity";
 import RepiceIngredient from "./component/Ingredient/RepiceIngredient";
+
+/* Un-ingredien */
 import Unprocessedingredients from "./component/Unprocessedingredients/Unprocessedingredients";
 import UnprocessedingredientsDetail from "./component/Unprocessedingredients/UnprocessedingredientsDetail";
 import NewUnprocessedingredients from "./component/Unprocessedingredients/NewUnprocessedingredients";
+
+/* report */
 import Repost from "./component/Report/Report";
 import ReportDetail from "./component/Report/ReportDetail";
+
+/* invoice */
 import Importimvoice from "./component/Importimvoice/Importimvoice";
 import ImportimvoiceDetail from "./component/Importimvoice/ImportimvoiceDetail"
 
@@ -42,6 +56,7 @@ function App() {
           <Route path="/item/:id" element ={<Update/>} />
           <Route path="/item/repice/:id" element ={<RepiceItem/>} />
           <Route path="/NewItem" element={<NewItem/>} />
+          <Route path="/item/quantity/:id" element={<ItemQuantity/>} />
           <Route path="/oders" element={<Oders/>} />
           <Route path="/oder/:id_order" element={<OderDetail/>} />
           <Route path="/revenu" element={<Revenu/>} />

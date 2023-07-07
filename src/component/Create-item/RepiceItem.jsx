@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
 import axios from "axios";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -110,11 +112,32 @@ const RepiceItem = () => {
                 }
             )
             .then(res =>{
-                alert("cập nhập thành công")
-                navigate('/')
+                toast.success('Thêm thành công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
             })
             .catch(err =>{
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
             
         }
@@ -149,12 +172,33 @@ const RepiceItem = () => {
                 }
             )
             .then(res =>{
-                alert("thêm thành công")
-                navigate('/')
+                toast.success('Thêm thành công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
             })
             .catch(err =>{
                 console.log(err)
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
         }
         
@@ -176,8 +220,10 @@ const RepiceItem = () => {
                     <form action="" className={classes["add-form"]}>
                     {repices.map((repice =>{
                             return (
-                                <div>
-                                <Input
+                                <div className={classes["repice"]}>
+                                    <h6>{repice.name}</h6>
+                                    <p>Số Lượng :{repice.quantity}</p>
+                                {/* <Input
                                     name="name"
                                     label="Tên thực phẩm"
                                     placeholder="Nhập tên thức ăn"
@@ -190,7 +236,7 @@ const RepiceItem = () => {
                                     placeholder="Nhập tên thức ăn"
                                     required={true}
                                     value={repice.quantity}
-                                />
+                                /> */}
                                 </div>
                             )
                         }))}
@@ -219,6 +265,18 @@ const RepiceItem = () => {
                        
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
     

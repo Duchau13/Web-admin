@@ -139,32 +139,6 @@ const IngredientDetail = () => {
                             value={items.price}
                             onChange={handleChange}
                         />
-                        <Input
-                            type="text"
-                            name="ingredient"
-                            label="Nguyên liệu"
-                            placeholder="Nhập thành phần nguyên liệu "
-                            required={true}
-                            value={items.ingredient}
-                            onChange={handleChange}
-                        />
-                        <Input
-                            type="number"
-                            name="energy"
-                            label="Năng lượng"
-                            placeholder="Nhập năng lượng thức ăn "
-                            required={true}
-                            value={items.energy}
-                            onChange={handleChange}
-                        />
-                        <div className={classes.textArea}>
-                            <label htmlFor="">
-                                Nhập mô tả sản phẩm
-                            </label>
-                            <textarea rows="3" cols="60" name="description" value={items.description} placeholder="" onChange={handleChange}>
-                            
-                            </textarea>
-                        </div>
                         
                         <button className={classes['button-submit']}
                             onClick={handleSubmit}

@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
 import axios from "axios";
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -70,11 +72,32 @@ const Update = () => {
                 }
             )
             .then(res =>{
-                alert("cập nhập thành công")
-                navigate('/')
+                toast.success('Cập Nhập Thành Công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
             })
             .catch(err =>{
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
             
         }
@@ -132,6 +155,18 @@ const Update = () => {
                        
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
     

@@ -70,7 +70,7 @@
 
 .button-remove > button {
     height:40px;
-    width: 50%;
+    width: 60%;
     cursor: pointer;
     background-color: var(--blue);
     font-size: 14px;

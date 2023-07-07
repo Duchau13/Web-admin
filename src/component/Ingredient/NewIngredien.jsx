@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
+import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const NewIngredient = () => {
@@ -41,12 +43,33 @@ const NewIngredient = () => {
                 }
             )
             .then(res =>{
-                alert("thêm thành công")
-                navigate('/ingredient')
+                toast.success('Thêm thành công', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate('/ingredient')
+                }, 2000);
             })
             .catch(err =>{
                 console.log(err)
                 setError(err.response.data.message)
+                toast.error(<div>{error}</div>, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
         }
         
@@ -110,6 +133,18 @@ const NewIngredient = () => {
                        
                 </div>
             </div>
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 };
