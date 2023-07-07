@@ -184,7 +184,6 @@ const ListItems = () => {
                 progress: undefined,
                 theme: "light",
             });
-            navigate(`/item/${id_item}`)
         }
         else{
             navigate(`/item/repice/${id_item}`)

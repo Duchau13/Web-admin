@@ -1,42 +1,46 @@
 import React from "react";
-import classes from './ingredientDetail.module.css'
+import classes from './ImportimvoiceDetailItem.module.css'
 import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import TextArea from "../Input/TextArea"
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../../redux/axois"
-import axios from "axios";
 import {ToastContainer, toast} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
-const IngredientDetail = () => {
+const ImportimvoiceDetailItem = () => {
     
     const token = localStorage.getItem('token')
     const [items,setItems] = useState([])
+    const [data,setData] = useState({})
     const [error, setError] = useState("")
     const navigate = useNavigate();
-    const {id_ingredient} = useParams();
+    const {id_u_ingredient} = useParams();
+    const {id_i_invoice} = useParams();
     
-
+    console.log(id_u_ingredient, id_i_invoice)
     useEffect(() => {
         
         async function getData(){
-          const res = await api.get(`/items/detail/${id_ingredient}`)
+          const res = await api.get(`/importinvoicedetails/detail/${id_i_invoice}/${id_u_ingredient}`,{
+            headers: {
+                Access_token: token,
+            }
+          })
           return res
         }
         getData().then((res) => {
-          setItems(res.data.item[0])
+          console.log(res)  
+          setItems(res.data.item)
         })
         getData().catch((err) => {
           console.log(err)
         })
         console.log(1)
-      },[id_ingredient])
+      },[id_u_ingredient])
     
       
       
@@ -61,7 +65,9 @@ const IngredientDetail = () => {
 
         try{
         {
-            api.put(`/ingredients/update/${id_ingredient}`, items,
+            api.put(`/importinvoicedetails/${id_i_invoice}/${id_u_ingredient}`, {
+                quantity: items.quantity
+            },
                 {
                     headers: {
                         Access_token: token,
@@ -69,7 +75,7 @@ const IngredientDetail = () => {
                 }
             )
             .then(res =>{
-                toast.success('Cập nhật thành công', {
+                toast.success('Cập Nhật Thành Công', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -80,12 +86,12 @@ const IngredientDetail = () => {
                     theme: "light",
                 });
                 setTimeout(() => {
-                    navigate('/ingredient')
+                    navigate('/unprocessedingredients')
                 }, 2000);
             })
             .catch(err =>{
-                setError(err.response.data.message)
-                toast.error(<div>{error}</div>, {
+                console.log(err);
+                toast.warning('Thao Tác Thất Bại', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -104,64 +110,37 @@ const IngredientDetail = () => {
         }
         
     }
-
+    console.log(items);
     return (
         <div>
-            <Link to="/ingredient" className={classes["back-icon"]}>
+            <Link to="/unprocessedingredients" className={classes["back-icon"]}>
                 <i class="fa-solid fa-chevron-left"></i>
                 <h>Quay lai</h>
             </Link>
             <div className={classes["container"]}>
                 <div className={classes["form-main"]}>
-                    <h1>{id_ingredient==="new" ? "Thêm mới thức ăn" : "Cập nhập thông tin thức ăn"}</h1>
+                    <h1>{"Cập nhập thông tin thực phẩm"}</h1>
                     <p className={classes["text-err"]}>{error}</p>
                     <form action="" className={classes["add-form"]}>
-                    <Input
-                            name="name"
-                            label="Tên thức ăn"
-                            placeholder="Nhập tên thức ăn"
-                            required={true}
-                            value={items.name}
-                            onChange={handleChange}
-                        />
-                        
-                        <Input
-                            name="image"
-                            label="Ảnh"
-                            placeholder="Nhập đường dẫn hình ảnh"
-                            required={true}
-                            value={items.image}
-                            onChange={handleChange}
-                        />
-                        
-                        <Input
-                            type="text"
-                            name="id_type"
-                            label="Loại thức ăn"
-                            placeholder="Nhập số loại thức ăn "
-                            required={true}
-                            readOnly
-                            value={items.name_type}
-                            //onChange={handleChange}
-                        />
                         <Input
                             type="number"
                             name="quantity"
-                            label="Số lượng"
-                            placeholder="Nhập số lượng "
+                            label="Số Lượng"
+                            placeholder="Số lượng thực phẩm"
                             required={true}
                             value={items.quantity}
                             onChange={handleChange}
                         />
-                        <Input
+                        
+                        {/* <Input
                             type="number"
-                            name="price"
+                            name="unit_price"
                             label="Giá"
-                            placeholder="Nhập Giá "
+                            placeholder="Giá thực phẩm"
                             required={true}
-                            value={items.price}
+                            value={items.unit_price}
                             onChange={handleChange}
-                        />
+                        /> */}
                         
                         <button className={classes['button-submit']}
                             onClick={handleSubmit}
@@ -188,4 +167,4 @@ const IngredientDetail = () => {
     
 }
 
-export default IngredientDetail;
+export default ImportimvoiceDetailItem;

@@ -86,7 +86,7 @@ const Ingredient = () => {
             })
             //console.log(item.id_item)
             .then(() =>{
-                toast.success('Chế Biến Thành Công', {
+                toast.success('Xoá Thành Công', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,

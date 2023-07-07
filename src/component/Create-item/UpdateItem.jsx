@@ -72,7 +72,7 @@ const Update = () => {
                 }
             )
             .then(res =>{
-                toast.success('Cập Nhập Thành Công', {
+                toast.success('Cập Nhật Thành Công', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -150,7 +150,7 @@ const Update = () => {
                         <button className={classes['button-submit']}
                             onClick={handleSubmit}
                         >
-                            Cập Nhập</button>
+                            Cập Nhật</button>
                     </form>
                        
                 </div>

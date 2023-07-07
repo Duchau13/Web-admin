@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './ingredientDetail.module.css'
+import classes from './NewimportinvoiceDetail.module.css'
 import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,54 +14,55 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const IngredientDetail = () => {
+const NewimportinvoiceDetail = () => {
     
     const token = localStorage.getItem('token')
     const [items,setItems] = useState([])
+    const [idingredient,setIderedient] = useState()
+    const [quantity,setQuantity] = useState()
+    const [price,setPrice] = useState()
     const [error, setError] = useState("")
     const navigate = useNavigate();
-    const {id_ingredient} = useParams();
+    const { id_i_invoice } = useParams();
     
 
     useEffect(() => {
         
         async function getData(){
-          const res = await api.get(`/items/detail/${id_ingredient}`)
+          const res = await api.get(`/unprocessedingredients`,{
+            headers: {
+                Access_token: token,
+            },
+          })
           return res
         }
         getData().then((res) => {
-          setItems(res.data.item[0])
+            setItems(res.data.itemList)
         })
         getData().catch((err) => {
           console.log(err)
         })
         console.log(1)
-      },[id_ingredient])
+    },[])
     
+    console.log(id_i_invoice)  
       
       
-        /*    handleChange= (e) => {
-            console.log("change")
-            let track= items; // <-- track is reference to state
-            track[e.target.name]=e.target.value; // <-- state mutation!
-            setItems(track); // <-- save state reference back into state
-            // console.log(items)
-          } */
 
-          const handleChange= (e) => {
-            setItems(items => ({
-              ...items,
-              [e.target.name]: e.target.value
-            }));
-        }
+          
 
 
-      const handleSubmit = (e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault();
 
         try{
         {
-            api.put(`/ingredients/update/${id_ingredient}`, items,
+            api.post(`/importinvoicedetails`, {
+                quantity:quantity,
+                id_i_invoice: id_i_invoice,
+                id_u_ingredient: idingredient,
+                unit_price:price
+            },
                 {
                     headers: {
                         Access_token: token,
@@ -69,7 +70,7 @@ const IngredientDetail = () => {
                 }
             )
             .then(res =>{
-                toast.success('Cập nhật thành công', {
+                toast.success('Thêm thành công', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -80,7 +81,7 @@ const IngredientDetail = () => {
                     theme: "light",
                 });
                 setTimeout(() => {
-                    navigate('/ingredient')
+                    navigate(`/importinvoices/${id_i_invoice}`)
                 }, 2000);
             })
             .catch(err =>{
@@ -104,70 +105,54 @@ const IngredientDetail = () => {
         }
         
     }
-
+    const handleChangeIngre = (e) => {
+        setIderedient(e.target.value)
+    }
+    
+    const handleChangeQuantity = (e) => {
+        setQuantity(e.target.value)
+    }
+    const handleChangePrice = (e) => {
+        setPrice(e.target.value)
+    }
+    console.log(id_i_invoice,idingredient,quantity,price)
+    
     return (
         <div>
-            <Link to="/ingredient" className={classes["back-icon"]}>
+            <Link to={`/importinvoices/${id_i_invoice}`} className={classes["back-icon"]}>
                 <i class="fa-solid fa-chevron-left"></i>
                 <h>Quay lai</h>
             </Link>
             <div className={classes["container"]}>
                 <div className={classes["form-main"]}>
-                    <h1>{id_ingredient==="new" ? "Thêm mới thức ăn" : "Cập nhập thông tin thức ăn"}</h1>
-                    <p className={classes["text-err"]}>{error}</p>
-                    <form action="" className={classes["add-form"]}>
-                    <Input
-                            name="name"
-                            label="Tên thức ăn"
-                            placeholder="Nhập tên thức ăn"
-                            required={true}
-                            value={items.name}
-                            onChange={handleChange}
-                        />
-                        
+                    <h1>Thêm nguyên liệu</h1>
+                            <select name="lang" id="lang-select" multiple onChange={handleChangeIngre}  className={classes["set__payment"]}>
+                            {items.map((item) => {
+                            return(
+                                <option value={item.id_u_ingredient}>
+                                {item.name}
+                                </option>
+                            )})}   
+                            </select>
                         <Input
-                            name="image"
-                            label="Ảnh"
-                            placeholder="Nhập đường dẫn hình ảnh"
-                            required={true}
-                            value={items.image}
-                            onChange={handleChange}
-                        />
-                        
-                        <Input
-                            type="text"
-                            name="id_type"
-                            label="Loại thức ăn"
-                            placeholder="Nhập số loại thức ăn "
-                            required={true}
-                            readOnly
-                            value={items.name_type}
-                            //onChange={handleChange}
-                        />
-                        <Input
-                            type="number"
-                            name="quantity"
+                            name="quantityitem"
                             label="Số lượng"
-                            placeholder="Nhập số lượng "
+                            placeholder="Nhập số lượng"
                             required={true}
-                            value={items.quantity}
-                            onChange={handleChange}
+                            onChange={handleChangeQuantity}  
                         />
                         <Input
-                            type="number"
                             name="price"
                             label="Giá"
-                            placeholder="Nhập Giá "
+                            placeholder="Nhập giá nguyên liệu"
                             required={true}
-                            value={items.price}
-                            onChange={handleChange}
+                            onChange={handleChangePrice}  
                         />
-                        
                         <button className={classes['button-submit']}
                             onClick={handleSubmit}
                         >
-                            Cập Nhật</button>
-                    </form>
+                            Thêm mới
+                        </button>
                        
                 </div>
             </div>
@@ -188,4 +173,4 @@ const IngredientDetail = () => {
     
 }
 
-export default IngredientDetail;
+export default NewimportinvoiceDetail;

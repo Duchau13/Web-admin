@@ -38,6 +38,9 @@ const Importimvoice = () => {
             <div className={classes["title"]}>
                 <h1>Danh Sách Hoá Đơn Nhập</h1>
             </div>
+            <div className={classes["button-add"]} onClick={() => navigate("/importinvoice/new")}>
+                <button>Tạo hoá đơn nhập</button>
+            </div>
             {orders.map((order) =>{
             return(
             <div className={classes["container__orders"]}>

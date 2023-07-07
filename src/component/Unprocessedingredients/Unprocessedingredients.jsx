@@ -188,11 +188,11 @@ const Unprocessedingredients = () => {
                                     <td className={classes['column-count']}>
                                         <div>Số Lượng: {item.quantity}</div>
                                     </td>
-                                    <td className={classes['button-remove']}>
+                                    {/* <td className={classes['button-remove']}>
                                         <button 
                                             onClick={() => handleProcess(item.id_u_ingredient)}
                                         >Nhập</button>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         }))}

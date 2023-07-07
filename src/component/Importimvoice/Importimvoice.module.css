@@ -95,3 +95,14 @@
     background-color: var(--red);
     border-color: var(--red);
 }
+
+.button-add{
+    margin-left: 150px;
+}
+.button-add>button{
+    width:200px;
+    height: 50px;
+    border-color:#f7f4ef;
+    background-color: #00CCCC;
+    border-radius: 10px;
+}
