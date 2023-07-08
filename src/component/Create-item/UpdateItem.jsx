@@ -87,8 +87,7 @@ const Update = () => {
                 }, 2000);
             })
             .catch(err =>{
-                setError(err.response.data.message)
-                toast.error(<div>{error}</div>, {
+                toast.error(`${err.response.data.message}`, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -97,7 +96,7 @@ const Update = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
+                });;
             })
             
         }

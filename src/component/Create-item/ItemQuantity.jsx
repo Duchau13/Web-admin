@@ -51,8 +51,7 @@ const ItemQuantity = () => {
             })
             .catch(err =>{
                 console.log(err)
-                setError(err.response.data.message)
-                toast.error(<div>{error}</div>, {
+                toast.error(`${err.response.data.message}`, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -61,7 +60,7 @@ const ItemQuantity = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
+                });;
             })
         }
         

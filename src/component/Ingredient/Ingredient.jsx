@@ -131,7 +131,7 @@ const Ingredient = () => {
     }
     const handleCreate = () => {
         if(role==="5"){
-            navigate(`/ingredient/Newingredỉnt`)
+            navigate(`/ingredient/Newingredint`)
         }
         else{
             toast.error('Bạn không có quyền sử dụng chức năng này', {

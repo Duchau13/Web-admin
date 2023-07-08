@@ -50,7 +50,7 @@ const UnprocessedingredientsDetail = () => {
             // console.log(items)
           } */
 
-          const handleChange= (e) => {
+        const handleChange= (e) => {
             setItems(items => ({
               ...items,
               [e.target.name]: e.target.value

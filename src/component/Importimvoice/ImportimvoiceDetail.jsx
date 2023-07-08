@@ -73,6 +73,7 @@ const ImportimvoiceDetail = () => {
             })
             .catch((err) => {
                 setError(err.response.data.message)
+                console.log(error)
                 toast.error(<div>{error}</div>, {
                     position: "top-right",
                     autoClose: 2000,

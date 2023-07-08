@@ -59,8 +59,7 @@ const NewIngredient = () => {
             })
             .catch(err =>{
                 console.log(err)
-                setError(err.response.data.message)
-                toast.error(<div>{error}</div>, {
+                toast.error(`${err.response.data.message}`, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -69,7 +68,7 @@ const NewIngredient = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
+                });;
             })
         }
         

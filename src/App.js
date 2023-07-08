@@ -71,7 +71,7 @@ function App() {
 
           <Route path="/ingredient" element={<Ingredient/>} />
           <Route path="/ingredient/:id_ingredient" element={<IngredientDetail/>} />
-          <Route path="/ingredient/Newingredỉnt" element={<NewIngredient/>} />
+          <Route path="/ingredient/Newingredint" element={<NewIngredient/>} />
           <Route path="/ingredient/quantity/:id_ingredient" element={<IngredientQuantity/>} />
           <Route path="/ingredient/repice/:id_ingredient" element={<RepiceIngredient/>} />
 

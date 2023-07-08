@@ -84,8 +84,7 @@ const IngredientDetail = () => {
                 }, 2000);
             })
             .catch(err =>{
-                setError(err.response.data.message)
-                toast.error(<div>{error}</div>, {
+                toast.error(`${err.response.data.message}`, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -94,7 +93,7 @@ const IngredientDetail = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
+                });;
             })
             
         }
@@ -113,7 +112,7 @@ const IngredientDetail = () => {
             </Link>
             <div className={classes["container"]}>
                 <div className={classes["form-main"]}>
-                    <h1>{id_ingredient==="new" ? "Thêm mới thức ăn" : "Cập nhập thông tin thức ăn"}</h1>
+                    <h1>{"Thêm mới nguyên liệu"}</h1>
                     <p className={classes["text-err"]}>{error}</p>
                     <form action="" className={classes["add-form"]}>
                     <Input

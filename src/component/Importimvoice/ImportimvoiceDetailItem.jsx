@@ -86,12 +86,13 @@ const ImportimvoiceDetailItem = () => {
                     theme: "light",
                 });
                 setTimeout(() => {
-                    navigate('/unprocessedingredients')
+                    navigate(`/importinvoices/${id_i_invoice}`)
                 }, 2000);
             })
             .catch(err =>{
+                setError(err.response.data.message)
                 console.log(err);
-                toast.warning('Thao Tác Thất Bại', {
+                toast.warning(<div>{error}</div>, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -113,7 +114,7 @@ const ImportimvoiceDetailItem = () => {
     console.log(items);
     return (
         <div>
-            <Link to="/unprocessedingredients" className={classes["back-icon"]}>
+            <Link to={`/importinvoices/${id_i_invoice}`} className={classes["back-icon"]}>
                 <i class="fa-solid fa-chevron-left"></i>
                 <h>Quay lai</h>
             </Link>

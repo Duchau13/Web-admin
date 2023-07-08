@@ -57,7 +57,8 @@ const NewUnprocessedingredients = () => {
                 }, 2000);
             })
             .catch(err =>{
-                toast.success('Thêm Mới Thất Bại', {
+                setError(err.response.data.message)
+                toast.warning(<div>{error}</div>, {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: true,
